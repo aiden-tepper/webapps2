@@ -1,6 +1,9 @@
 # Course Expectations
-*Use this document as a template for your own version.*
+
+<br>
 
 ## Expectations of Work
+-expectation
 
 ## Expectations of Student Conduct
+-expectation
