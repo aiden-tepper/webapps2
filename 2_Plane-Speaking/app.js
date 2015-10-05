@@ -1,12 +1,12 @@
-var xPlanes = [
-  "X-1",
-  "X-3",
-  "X-15",
-  "X-29",
-  "X-31",
-  "X-37",
-  "X-45"
-];
+var xPlanes = {
+  "X-1":"description",
+  "X-3":"description",
+  "X-15":"description",
+  "X-29":"description",
+  "X-31":"description",
+  "X-37":"description",
+  "X-45":"description"
+};
 
 var e = document.getElementById("planes-list");
 
