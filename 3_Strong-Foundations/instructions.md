@@ -19,7 +19,7 @@ We're going to make a homepage for our app development firm. Of course we'll eve
 ## Primary Objective
 Use the Foundation classes to get this homepage looking right. There's more than one right answer to this assignment, so long as the site responds well and looks good.
 
-One thing we'll need for sure is to clean up that nav. Look in the documentation for a nav bar.
+One thing we'll need for sure is to clean up that nav. Look i1n the documentation for a nav bar.
 
 ## Secondary Objectives
 ### Oooh, pretty pictures!
