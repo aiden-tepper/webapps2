@@ -34,7 +34,7 @@ To get going using Firebase, you really only need to know 2 things:
 1. Firebase stores JSON.
 2. Firebase is **event-driven**.
 
-You should know by now that JSON is JavaScript Object Notation. Essentially this means that my data is all stored within key-value pairs. Like so:
+You should know by now that JSON is JavaScript Object Notation. Essentially this means that my data are all stored within key-value pairs. Like so:
 
     [
       {
@@ -90,7 +90,7 @@ We basically never use anything in this class that doesn't have excellent docume
 We're building a feedback form/page. It will be quite simple, with nothing but a list of feedbacks including time, submitter, and their comment. We'll have a button that pops up a form to add a new comment. That's it!
 
 ### Primary Objectives
-1. Use jQuery and Firebase to create either a `<ul>` full of `<lis>` for each comment, or just a set of `<div>` elements, one for each comment, showing the comments vital statistics (commenter, date, comment text).
+1. Use jQuery and Firebase to create either a `<ul>` full of `<li>`s for each comment, or just a set of `<div>` elements, one for each comment, showing the comments vital statistics (commenter, date, comment text).
 2. Create a functional form to add new comments.
 
 ### Secondary Objectives
