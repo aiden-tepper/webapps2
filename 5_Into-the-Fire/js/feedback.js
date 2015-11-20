@@ -14,7 +14,7 @@ $(document).ready(function(){
 
   function update(data){
     var feedbackList =
-    "<div>Name: " + data.fullname +
+    "<div>Name: " + data.firstname +
     "<div>Email: " + data.email +
     "<div>Feedback: " + data.feedback;
     console.log("Data: " + JSON.stringify(data));
@@ -36,7 +36,6 @@ $(document).ready(function(){
       "lastname":lastname,
       "email":email,
       "feedback":feedback,
-      "fullname":function(){return this.firstname + " " + this.lastname;}
     };
 
     firebase.push(JSONObj, function(){
