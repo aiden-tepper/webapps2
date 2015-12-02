@@ -18,13 +18,15 @@ $(document).ready(function(){
   });
 
   function update(data){
+    $("#feedback-list").html("<br>");
     for(var fbelem in data){
-      console.log("fbelem: " + fbelem);
-      // var feedbackList =
-      // "<div>Name: " + elem2.firstname +
-      // "<div>Email: " + elem2.email +
-      // "<div>Feedback: " + elem2.feedback;
-      // $("#feedback-list").html(feedbackList)
+      var elem = data[fbelem];
+      var feedbackList =
+      "<div>Name: " + elem.firstname +
+      "<div>Email: " + elem.email +
+      "<div>Feedback: " + elem.feedback;
+      $("#feedback-list").append(feedbackList);
+      $("#feedback-list").append("<br>");
     }
   }
 
@@ -36,6 +38,7 @@ $(document).ready(function(){
     var lastname = $("#lastname").val();
     var email = $("#email").val();
     var feedback = $("#feedback").val();
+    //var time = new Date()
 
     var JSONObj = {
       "firstname":firstname,
