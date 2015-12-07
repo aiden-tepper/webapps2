@@ -1,5 +1,18 @@
-$(document).ready(function(){
+function addEventListeners() {
+
   console.log("Document loaded");
+
+  $("#heart").hover(function(){
+    $("#heart").attr("src", "img/heart_filled.png");
+    console.log("filled");
+  }, function(){
+    $("#heart").attr("src", "img/heart_outlined.png");
+    console.log("outlined");
+  });
+
+  $("#heart").click(function(){
+    //favorites ++
+  });
 
   $("#submit_button").click(function(){
     $("#addModal").foundation("reveal", "close");
@@ -24,22 +37,15 @@ $(document).ready(function(){
     $("#feedback-list").html("<br>");
     for(var fbelem in data){
       var elem = data[fbelem];
-      if(elem.heart == "true") {
-        var feedbackList =
-        "<div><h3><i>" + elem.timestamp + ":</i></h3>" +
-        "<h3>" + elem.fullname + " - " + elem.feedback + "</h3>" +
-        "<img id='filled' src='img/heart_filled.png' width='5%'>" + "</div>";
-        $("#feedback-list").append(feedbackList);
-        $("#feedback-list").append("<br>");
-      } else if (elem.heart == "false") {
-        var feedbackList =
-        "<div><h3><i>" + elem.timestamp + ":</i></h3>" +
-        "<h3>" + elem.fullname + " - " + elem.feedback + "</h3>" +
-        "<img id='outlined' src='img/heart_outlined.png' width='5%'>" + "</div>";
-        $("#feedback-list").append(feedbackList);
-        $("#feedback-list").append("<br>");
-      }
+      var feedbackList =
+      "<div><h3><i>" + elem.timestamp + ":</i></h3>" +
+      "<h3>" + elem.fullname + " - " + elem.feedback + "</h3>" +
+      "<h3>" + elem.faves + " favorites</h3>" +
+      "<img id='heart' src='img/heart_outlined.png' width='5%'>" + "</div>";
+      $("#feedback-list").append(feedbackList);
+      $("#feedback-list").append("<br>");
     }
+    // addEventListeners();
   }
 
   $("#add-form").submit(function(event){
@@ -55,7 +61,7 @@ $(document).ready(function(){
       "fullname":fullname,
       "feedback":feedback,
       "timestamp":timestamp,
-      "heart":"false"
+      "faves": 0
     };
 
     firebase.push(JSONObj, function(){
@@ -64,16 +70,8 @@ $(document).ready(function(){
 
   });
 
-  $("#outlined").hover(function(){
-    $("#outlined").attr("src", "img/heart_filled.png");
-  }, function(){
-    $("#outlined").attr("src", "img/heart_outlined.png");
-  });
+}
 
-  $("#filled").hover(function(){
-    $("#filled").attr("src", "img/heart_outlined.png");
-  }, function(){
-    $("#filled").attr("src", "img/heart_filled.png");
-  });
-
+$(document).ready(function(){
+  addEventListeners();
 });
