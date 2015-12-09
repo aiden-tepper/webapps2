@@ -1,6 +1,6 @@
-function addEventListeners() {
+var firebase = new Firebase("https://into-the-5ire.firebaseio.com/");
 
-  console.log("Document loaded");
+function addEventListeners() {
 
   $("#heart").hover(function(){
     $("#heart").attr("src", "img/heart_filled.png");
@@ -11,14 +11,22 @@ function addEventListeners() {
   });
 
   $("#heart").click(function(){
-    //favorites ++
+    var key = $(this).parent().data("id");
+    var currentFaves = $(this).parent().data("faves");
+    var newFaves = currentFaves + 1;
+    firebase.child(key).update({
+      faves: newFaves
+    });
   });
 
   $("#submit_button").click(function(){
     $("#addModal").foundation("reveal", "close");
   });
 
-  var firebase = new Firebase("https://into-the-5ire.firebaseio.com/");
+}
+
+
+function updateDOM() {
 
   firebase.on("value", function(snapshot){
     var data = snapshot.val();
@@ -42,10 +50,12 @@ function addEventListeners() {
       "<h3>" + elem.fullname + " - " + elem.feedback + "</h3>" +
       "<h3>" + elem.faves + " favorites</h3>" +
       "<img id='heart' src='img/heart_outlined.png' width='5%'>" + "</div>";
+      $("#feedback-list").data("id", fbelem);
+      $("#feedback-list").data("faves", elem.faves);
       $("#feedback-list").append(feedbackList);
       $("#feedback-list").append("<br>");
     }
-    // addEventListeners();
+    addEventListeners();
   }
 
   $("#add-form").submit(function(event){
@@ -73,5 +83,7 @@ function addEventListeners() {
 }
 
 $(document).ready(function(){
+  updateDOM();
   addEventListeners();
+  console.log("Document loaded");
 });
