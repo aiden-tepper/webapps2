@@ -1,5 +1,23 @@
 var firebase = new Firebase("https://into-the-5ire.firebaseio.com/");
 
+function update(data){
+  $("#feedback-list").html("<br>");
+  for(var fbelem in data){
+    var elem = data[fbelem];
+    var feedbackList =
+    "<div><h3><i>" + elem.timestamp + ":</i></h3>" +
+    "<h3>" + elem.fullname + " - " + elem.feedback + "</h3>" +
+    "<h3>" + elem.faves + " favorites</h3>" +
+    "<img id='heart' src='img/heart_outlined.png' width='5%'>" + "</div>";
+    $("#feedback-list").data("id", fbelem);
+    console.log("Key: " + $(this).data("id"));
+    $("#feedback-list").data("faves", elem.faves);
+    $("#feedback-list").append(feedbackList);
+    $("#feedback-list").append("<br>");
+  }
+  addEventListeners();
+}
+
 function addEventListeners() {
 
   $("#heart").hover(function(){
@@ -15,7 +33,7 @@ function addEventListeners() {
     var currentFaves = $(this).parent().data("faves");
     var newFaves = currentFaves + 1;
     firebase.child(key).update({
-      faves: newFaves
+      "faves": newFaves
     });
   });
 
@@ -34,29 +52,13 @@ function updateDOM() {
     console.log(data);
     update(data);
     console.log("Snapshot loaded into DOM");
+
     if(snapshot.val() == null) {
       $("#feedback-list").html("<br><h3>Be the first to add feedback!<h3>");
     }
   }, function(errorObject){
     console.log("The read failed: " + errorObject.code);
   });
-
-  function update(data){
-    $("#feedback-list").html("<br>");
-    for(var fbelem in data){
-      var elem = data[fbelem];
-      var feedbackList =
-      "<div><h3><i>" + elem.timestamp + ":</i></h3>" +
-      "<h3>" + elem.fullname + " - " + elem.feedback + "</h3>" +
-      "<h3>" + elem.faves + " favorites</h3>" +
-      "<img id='heart' src='img/heart_outlined.png' width='5%'>" + "</div>";
-      $("#feedback-list").data("id", fbelem);
-      $("#feedback-list").data("faves", elem.faves);
-      $("#feedback-list").append(feedbackList);
-      $("#feedback-list").append("<br>");
-    }
-    addEventListeners();
-  }
 
   $("#add-form").submit(function(event){
     event.preventDefault();
@@ -75,7 +77,7 @@ function updateDOM() {
     };
 
     firebase.push(JSONObj, function(){
-      console.log("Push to Firebase was successful: " + JSONObj.fullname);
+      console.log("Push to Firebase was successful");
     });
 
   });
@@ -84,6 +86,5 @@ function updateDOM() {
 
 $(document).ready(function(){
   updateDOM();
-  addEventListeners();
   console.log("Document loaded");
 });
